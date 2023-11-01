@@ -129,7 +129,7 @@ function printCarencyAndLocal(params) {
   return Intl.NumberFormat(currentAccount.locale, options).format(params);
 }
 
-// Вывод на страницу всех приходов и уходов
+// Вивід на сторінку всіх поповнень і відправлень
 function displayMovements(acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -164,7 +164,7 @@ function displayMovements(acc, sort = false) {
   });
 }
 
-// Создание логина из ФИО в объекте
+//  Стоврення логіна з ПІБ в об'єкті
 function createLogIn(accs) {
   accs.forEach(function (acc) {
     acc.logIn = acc.owner
@@ -178,7 +178,7 @@ function createLogIn(accs) {
 }
 createLogIn(accounts);
 
-// Подсчет и вывод на страницу общего баланса
+// Підрахунок балансу і вивід на сторінку загального балансу
 function calcPrintBalance(acc) {
   acc.balance = acc.movements.reduce(function (acc, val) {
     return acc + val;
@@ -192,7 +192,7 @@ function calcPrintBalance(acc) {
   labelBalance.textContent = `${printCarencyAndLocal(acc.balance)} `;
 }
 
-// Сумма и вывод на страницу прихода и ухода в footer
+// Сумма і вивід на сторінку поповлення і відправлень в footer
 function calcDisplaySum(movements) {
   const incomes = movements
     .filter((mov) => mov > 0)
@@ -207,7 +207,7 @@ function calcDisplaySum(movements) {
   labelSumInterest.textContent = `${printCarencyAndLocal(incomes + out)}`;
 }
 
-//Обновление интерфейса сайта
+//Оновлення інтерфейсу
 function updateUi(acc) {
   displayMovements(acc);
   calcPrintBalance(acc);
@@ -234,7 +234,7 @@ function startLogOut() {
   const timer = setInterval(tick, 1000);
   return timer;
 }
-//Кнопка входа в аккаунт
+//Кнопка входу в акаунт
 let currentAccount;
 let timer;
 btnLogin.addEventListener('click', function (e) {
@@ -281,7 +281,7 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
-//Перевод денег на другой аккаунт
+//Переказ коштів на інший акаунт
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const reciveAcc = accounts.find(function (acc) {
@@ -306,7 +306,7 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
-//Удаление аккаунта
+//Видалення акаунта
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
@@ -324,7 +324,7 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
-//Внесение денег на счет
+//Внесення коштів на сайт
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputLoanAmount.value);
@@ -341,13 +341,13 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
-// Общий баланс коротко
+// Загальний баланс коротко
 const overalBalance = accounts
   .map((acc) => acc.movements)
   .flat()
   .reduce((acc, mov) => acc + mov, 0);
 
-//Сортировка по приходам и уходам
+//Сортування по надходженнях і відправленнях
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
@@ -355,7 +355,7 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
-//Изменение значка валюты
+//Зміна значка валюти
 labelBalance.addEventListener('click', function () {
   Array.from(document.querySelectorAll('.movements__value'), function (val, i) {
     return (val.innerText = val.textContent.replace('$', 'USD'));
